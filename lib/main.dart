@@ -273,6 +273,7 @@ class MovieDetailPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           // Imagen de fondo que ocupa toda la pantalla
           Hero(
@@ -291,60 +292,70 @@ class MovieDetailPage extends StatelessWidget {
           ),
 
           // Container con estilo "glass"
-          Center(
-            child: Container(
-              width: 380,
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1), // Opacidad para el vidrio
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10,
-                    offset: Offset(0, 6),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-                  child: Container(
-                    color: Colors.black.withOpacity(
-                      0.2,
-                    ), // Fondo semitransparente
-                    child: Column(
-                      children: [
-                        Text(
-                          movie.title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
+          Container(
+            width: 380,
+            height: 400,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1), // Opacidad para el vidrio
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(0, 6),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                child: Container(
+                  color: Colors.black.withOpacity(
+                    0.2,
+                  ), // Fondo semitransparente
+                  child: Column(                    
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        movie.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '${movie.year} • ${movie.rating}',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 16,
-                          ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '${movie.year} • ${movie.rating}',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
                         ),
-                        const SizedBox(height: 16),
-                        Text(
-                          movie.description,
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 16,
-                          ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        movie.description,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
+            ),
+          ),
+          // Botón de retroceso
+          Positioned(
+            top: 40,
+            left: 20,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white, size: 30),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ),
         ],
